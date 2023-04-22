@@ -8,33 +8,33 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.matheus.fastfoodie.domain.model.Estado;
-import com.matheus.fastfoodie.domain.repository.EstadoRepository;
+import com.matheus.fastfoodie.domain.model.Restaurante;
+import com.matheus.fastfoodie.domain.repository.RestauranteRepository;
 
 @Repository
-public class RestauranteImpl implements EstadoRepository {
+public class RestauranteImpl implements RestauranteRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Estado> listar() {
-        return entityManager.createQuery("from Estado", Estado.class)
+    public List<Restaurante> listar() {
+        return entityManager.createQuery("from Restaurante", Restaurante.class)
                 .getResultList();
     }
 
-    public Estado buscar(Long id) {
-        return entityManager.find(Estado.class, id);
+    public Restaurante buscar(Long id) {
+        return entityManager.find(Restaurante.class, id);
     }
 
     @Transactional
-    public Estado salvar(Estado estado) {
-        return entityManager.merge(estado);
+    public Restaurante salvar(Restaurante restaurante) {
+        return entityManager.merge(restaurante);
     }
 
     @Transactional
-    public void remover(Estado estado) {
-    	estado = buscar(estado.getId());
-        entityManager.remove(estado);
+    public void remover(Restaurante restaurante) {
+    	restaurante = buscar(restaurante.getId());
+        entityManager.remove(restaurante);
     }
 
 }
