@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.matheus.fastfoodie.domain.model.Cozinha;
 import com.matheus.fastfoodie.domain.repository.CozinhaRepository;
+import com.matheus.fastfoodie.domain.service.CadastroCozinhaService;
 
 @RestController
 @RequestMapping("/cozinhas")
@@ -26,6 +27,9 @@ public class CozinhaController {
 
 	@Autowired
 	private CozinhaRepository repository;
+	
+	@Autowired
+	private CadastroCozinhaService cadastroCozinha;
 
 	@GetMapping
 	public List<Cozinha> listar() {
@@ -46,7 +50,7 @@ public class CozinhaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-		return repository.salvar(cozinha);
+		return cadastroCozinha.salvar(cozinha);
 	}
 
 	@PutMapping("/{id}")
