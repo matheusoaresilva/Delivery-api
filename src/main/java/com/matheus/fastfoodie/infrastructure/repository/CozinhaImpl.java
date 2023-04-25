@@ -1,10 +1,11 @@
-package com.matheus.fastfoodie.jpa;
+package com.matheus.fastfoodie.infrastructure.repository;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +37,12 @@ public class CozinhaImpl implements CozinhaRepository {
 
     @Override
     @Transactional
-    public void remover(Cozinha cozinha) {
-        cozinha = buscar(cozinha.getId());
+    public void remover(Long id) {
+        Cozinha cozinha = buscar(id);
+        
+        if (cozinha == null) {
+			throw new EmptyResultDataAccessException(1);
+		}
         entityManager.remove(cozinha);
     }
 

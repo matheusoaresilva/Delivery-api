@@ -1,4 +1,4 @@
-package com.matheus.fastfoodie.jpa;
+package com.matheus.fastfoodie.infrastructure.repository;
 
 import java.util.List;
 
